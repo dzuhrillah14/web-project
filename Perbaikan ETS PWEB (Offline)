@@ -42,7 +42,7 @@
               const capitalizedPokemonName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
               
               $("#POKEMON").append(`
-                            <div class="col-md-6">
+                            <div class="col-lg-3 col-md-6">
                                 <div class="card mb-4 shadow-sm custom-card">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">${capitalizedPokemonName}</h5>
