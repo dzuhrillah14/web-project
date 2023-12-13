@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POKEMON</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <style>
+      .custom-card {
+        border: 1px solid #007bff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="row" id="POKEMON"></div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "https://pokeapi.co/api/v2/pokemon",
+          type: "GET",
+          dataType: "json",
+          success: function (data) {
+            // Looping untuk mengambil data dari setiap pokemon dan membuat card
+            data.results.forEach(function (pokemon) {
+              // Menyimpan URL pada tombol DETAIL
+              const detailUrl = pokemon.url;
+
+              // Mengubah huruf awal dari nama pokemon menjadi kapital
+              const capitalizedPokemonName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+              
+              $("#POKEMON").append(`
+                            <div class="col-md-6">
+                                <div class="card mb-4 shadow-sm custom-card">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">${capitalizedPokemonName}</h5>
+                                        <div class="btn-group">
+                                            <a href="${detailUrl}" class="btn btn-sm btn-primary">DETAIL</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+            });
+          },
+          error: function (error) {
+            console.log("Error:", error);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
